@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            line-height: 1.5rem;
+        }
+        header {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px #000 solid;
+            margin-bottom: 10px;
+
+        }
+        #container{
+            width: 90%;
+            margin:auto;
+            padding: 10px;
+        }
+        </style>
+        </head>
+        <body>
+    <header>
+        <h1>JQuery AJAX</h1>
+    </header>
+    <div id ="container">
+<div id="result"></div>
+<form id='postForm' 
+action="https://jsonplaceholder.typicode.com/posts">
+<br>
+<input type="text" id="title"placeholder="Title">
+<textarea placeholder='body' id="body"></textarea>
+<br>
+<button id="submit" value="submit">Submit</button>
+</form>
+    </div>
+    <script>
+        $('#postForm').submit(function(e){
+            e.preventDefault();
+            var title =$('#title').val();
+            var body =$('#body').val()
+            var url =$(this).attr('action');
+            $.post(url, {title:title, body:body}).
+            done(function(data){
+                console.log('post saved');
+                console.log(data);
+            })
+        })
+         /*
+        $.ajax({
+            method:'GET',
+              url: 'https://jsonplaceholder.typicode.com/posts',
+              dataType: 'json'
+                 }).done(function(data){
+                     console.log(data)
+                     $.map(data, function(post, i){
+                         $('#result').append('<h3>'+post.
+                         title+'</h3<p>'+post.body+'</p>');
+                     })
+                 })
+       
+        $(document).ready(function(){
+            $('#result').load('Result.html', function( responseTxt, statusTxt,xhr){
+                if(statusTxt=="success"){
+                    alert("it went fine");
+
+                }else if (statusTxt=='error'){
+                    alert('error: '+xhr.statusTxt)
+                }
+          });  
+        })
+        $.get('Result.html', function(data){
+            $('#result').html(data);
+        })
+        $.getJSON('users.json', function(data){
+            $.each(data, function(i, user){
+$('ul#users').append('<li>'+user.firstName+'</li>')
+            })
+        })
+
+        */
+    
+    </script>
+</body>
+</html>
